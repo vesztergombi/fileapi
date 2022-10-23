@@ -21,4 +21,7 @@ async def ls(path_dto: PathDto, response: Response):
         response.status_code = status.HTTP_404_NOT_FOUND
         return {'message': f'{dir_path} is not a directory'}
 
-    return [{'path': p, 'is_dir': p.is_dir()} for p in dir_path.iterdir()]
+    return {
+        'directory_path': dir_path,
+        'directory_content': [{'path': p, 'is_dir': p.is_dir()} for p in dir_path.iterdir()]
+    }
